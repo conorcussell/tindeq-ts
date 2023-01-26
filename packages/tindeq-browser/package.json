@@ -1,0 +1,21 @@
+{
+  "name": "@tindeq-ts/browser",
+  "version": "0.0.1",
+  "main": "./dist/index.ts",
+  "types": "./dist/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint *.ts*"
+  },
+  "dependencies": {
+    "@tindeq-ts/core": "workspace:*",
+    "tsup": "^6.5.0"
+  },
+  "devDependencies": {
+    "@types/web-bluetooth": "^0.0.16",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.5.2"
+  }
+}
