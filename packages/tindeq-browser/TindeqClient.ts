@@ -58,23 +58,8 @@ const createTindeqClient = ({ write, notify }: TindeqCharacteristics): TindeqCli
 
   return {
     startMeasuring: async (callback: (weight: number, seconds: number) => void) => {
-      // handler = createMeasurementHandler(callback)
-      notify.addEventListener('characteristicvaluechanged', (event: Event) => {
-        // TODO: should remove this
-
-        console.log('different')
-        // @ts-expect-error
-        const data = event.target.value as DataView
-
-        const eventType = parseEventType(data)
-
-        if (eventType === NOTIFICATION_TYPES.WEIGHT_MEASURE) {
-          const iterable = parseWeightEvent(data)
-          for (const [weight, seconds] of iterable) {
-            callback(Math.abs(weight), seconds);
-          }
-        }
-      })
+      handler = createMeasurementHandler(callback)
+      notify.addEventListener('characteristicvaluechanged', handler)
       await notify.startNotifications()
       await write.writeValueWithResponse(bytesArray(COMMANDS.START_MEASURING))
     },
